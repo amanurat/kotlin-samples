@@ -1,0 +1,44 @@
+package com.test
+
+import com.test.stream.RandomStream
+import java.util.concurrent.TimeUnit.*
+import java.util.stream.IntStream
+
+/**
+ * Kotlin Sample class
+ *
+ * @author <a href="https://plus.google.com/+SureshG">Suresh G</a>
+ * @version 1.0
+ */
+
+fun main(args: Array<String>) {
+
+    val s = System.nanoTime()
+    // Eager
+    listOf(1, 2, 3).map {
+        println("Got input ${it}")
+        it * 2
+    }.forEach { println(it) }
+
+    // Lazy (sequenceOf())
+    (1..10).asSequence().map {
+        println("Got Seq input ${it}")
+        it * 2
+    }.forEach { println(it) }
+
+    val e = System.nanoTime()
+
+    println("Kotlin Time taken : ${MILLISECONDS.convert((e - s), NANOSECONDS)}")
+
+    IntStream.range(1, 10).map {
+        println("Got ${it}")
+        it * 2
+    }.forEach { println(it) }
+
+    RandomStream().stream().limit(5).map {
+        println("Got from RandomStream: ${it}")
+        it * 2
+    }.forEach { println(it) }
+
+
+}
