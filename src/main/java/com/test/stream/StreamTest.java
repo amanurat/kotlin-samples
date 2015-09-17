@@ -10,17 +10,16 @@ import java.util.stream.IntStream;
  * @author <a href="https://plus.google.com/+SureshG">Suresh G</a>
  * @version 1.0
  */
-public class Test {
+public class StreamTest {
 
     public static void main(String[] args) {
         long s = System.nanoTime();
-        Arrays.asList(1, 2, 3).stream().map(Test::tx).forEach(System.out::println);
-        IntStream.range(1, 1000).map(Test::tx).forEach(System.out::println);
+        Arrays.asList(1, 2, 3).stream().map(StreamTest::tx).forEach(System.out::println);
+        IntStream.range(1, 10).parallel().map(StreamTest::tx).forEach(System.out::println);
+
         long e = System.nanoTime();
         System.out.println("Time taken : " + TimeUnit.MILLISECONDS.convert((e - s), TimeUnit.NANOSECONDS));
 
-        RandomStream ints = new RandomStream();
-        ints.stream().limit(10).forEach(System.out::println);
     }
 
     public static int tx(int input) {
